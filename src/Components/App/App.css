@@ -1,0 +1,14 @@
+.Wrapper {
+  background: #f2f2f2;
+  margin: 0px;
+  padding: 0px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+}

@@ -1,0 +1,61 @@
+.movie {
+  position: relative;
+  margin: 20px 0px 20px 0px;
+}
+.wrapperMovie {
+  width: 450px;
+  margin: 0px;
+}
+
+.releaseDateMovieList {
+  position: absolute;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 17px;
+  color: #babbc3;
+  bottom: 130px;
+}
+
+.title {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 25px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #494c62;
+}
+
+.genres {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 16px;
+  color: #babbc3;
+  white-space: nowrap;
+  width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.voteAverage {
+  position: absolute;
+  border: 2px solid #ff0079;
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 6px;
+  right: 15px;
+  bottom: 30px;
+  color: #ff0079;
+  min-width: 40px;
+  text-align: center;
+}
+
+.moviePoster {
+  min-width: 445px;
+}

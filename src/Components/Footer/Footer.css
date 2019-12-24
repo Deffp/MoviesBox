@@ -1,0 +1,69 @@
+.footer {
+  background: #ffffff;
+  height: 150px;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+}
+
+.footerLogo {
+  margin-top: 20px;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 25px;
+  line-height: 31px;
+  text-transform: uppercase;
+  color: #494c62;
+  text-align: center;
+}
+
+.links {
+  margin-top: 20px;
+  text-align: end;
+  padding-right: 60px;
+}
+
+.footerLink {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 31px;
+  color: #80818a;
+  margin: 15px;
+}
+
+.underScore {
+  position: absolute;
+  top: 70px;
+  mix-blend-mode: normal;
+  opacity: 0.2;
+  border: 1px solid #babbc3;
+}
+
+.footerSocialLinks {
+  margin: 0px;
+  padding: 0px;
+  justify-content: row;
+}
+
+.designer {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 15px;
+  color: #80818a;
+  mix-blend-mode: normal;
+  padding-left: 45px;
+  opacity: 0.5;
+}
+
+.iconLinks {
+  text-align: center;
+}
+
+.iconLink {
+  padding: 30px;
+}

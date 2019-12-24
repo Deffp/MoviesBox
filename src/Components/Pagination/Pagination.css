@@ -1,0 +1,22 @@
+.row.Pagination {
+  width: 100%;
+}
+
+.Pagination {
+  list-style: none;
+}
+
+.btn-pagination {
+  height: 40px;
+  border: 2px solid #ff0079;
+}
+
+.text-btn {
+  font-family: Source Sans Pro;
+  margin: 3px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 35px;
+  color: #ff0079;
+}
