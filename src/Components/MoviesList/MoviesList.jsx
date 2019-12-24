@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Row } from 'react-bootstrap';
+import { observer } from 'mobx-react';
+import RootStore from '../../Store/RootStore';
 
-import { getMovies } from '../../Reducer/ReducerMoviesList';
 import MovieItem from '../MovieItem/MovieItem';
 import Pagination from '../Pagination/Pagination';
 import Loader from '../Loader/Loader';
@@ -10,28 +10,19 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './MoviesList.css';
 
+@observer
 class MoviesList extends Component {
   componentDidMount() {
     const {
       match: { params },
-      getMovies,
     } = this.props;
-    getMovies(params.page);
-  }
-
-  componentDidUpdate() {
-    const {
-      match: { params },
-      getMovies,
-    } = this.props;
-    getMovies(params.page);
+    RootStore.MoviesStore.setMovies(params.page);
   }
 
   renderMovieList = (movie) => <MovieItem key={movie.id} movie={movie} />;
 
   render() {
-    const { moviesList, loading } = this.props;
-
+    const { moviesList, loading } = RootStore.MoviesStore;
     return (
       <div>
         <Header />
@@ -49,9 +40,4 @@ class MoviesList extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  moviesList: state.moviesList,
-  loading: state.loading,
-});
-
-export default connect(mapStateToProps, { getMovies })(MoviesList);
+export default MoviesList;

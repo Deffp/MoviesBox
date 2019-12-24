@@ -26,13 +26,13 @@ export default class Pagination extends Component {
             {prevPage ? (
               <Link className="text-btn" to="/page/3">
                 {' '}
-                3{' '}
+                3
               </Link>
             ) : (
               <Link to={`${page}`} className="text-btn">
                 ...
               </Link>
-            )}{' '}
+            )}
           </li>
         </div>
         <Link className="text-btn" to={`/page/${prevPage ? 4 : page + 1}`}>

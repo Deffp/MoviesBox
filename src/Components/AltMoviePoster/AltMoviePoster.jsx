@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 
 export default class AltMoviePoster extends Component {
   checkMoviePoster = () => {
@@ -16,7 +15,3 @@ export default class AltMoviePoster extends Component {
     return <div>{this.checkMoviePoster()}</div>;
   }
 }
-
-AltMoviePoster.propTypes = {
-  movie: PropTypes.object,
-};

@@ -11,6 +11,7 @@ class MovieAPI {
       baseURL: this.baseURL,
     });
 
+    // eslint-disable-next-line max-len
     const result = instance.get(path, { params: { api_key: this.key, ...params } }).then((res) => res.data);
     return result;
   }
