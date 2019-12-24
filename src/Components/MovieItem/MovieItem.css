@@ -1,61 +1,85 @@
-.movie {
-  position: relative;
-  margin: 20px 0px 20px 0px;
-}
-.wrapperMovie {
-  width: 450px;
-  margin: 0px;
+.item {
+    height: 500px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 35px rgba(0, 0, 0, 0.1);      
+    margin: 8px; 
 }
 
-.releaseDateMovieList {
-  position: absolute;
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 17px;
-  color: #babbc3;
-  bottom: 130px;
+.col.moviePoster {
+    height: 75%;
 }
 
-.title {
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 25px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  color: #494c62;
+.wrapper {
+    padding: 0px;
 }
 
-.genres {
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 16px;
-  color: #babbc3;
-  white-space: nowrap;
-  width: 150px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.poster {
+    width: 100%;
+    height: 100%;    
 }
 
-.voteAverage {
-  position: absolute;
-  border: 2px solid #ff0079;
-  box-sizing: border-box;
-  border-radius: 5px;
-  padding: 6px;
-  right: 15px;
-  bottom: 30px;
-  color: #ff0079;
-  min-width: 40px;
-  text-align: center;
+.row.infoMovie {
+    height: 25%;
+    padding: 20px;
+    background: #FFFFFF;
+    flex-direction: column;
+    margin: 0px;
+    opacity: 0.5;
 }
 
-.moviePoster {
-  min-width: 445px;
+.nameMovie {
+    padding: 3px;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    max-width: 70%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #494C62;
+    margin: 0px;
+}
+
+.categoriesMovie {
+    padding: 3px;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: 600;
+    width: 70%;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #BABBC3;
+}
+
+.ratingMovie {
+    border: 2px solid #FF0079;
+    box-sizing: border-box;
+    border-radius: 5px;
+    margin: auto;
+    text-align: center;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    color: #FF0079;
+    padding: 10px;
+    width: 50px;
+}
+
+.col.releaseDate {
+    position: absolute;
+    top: 330px;
+    left: 30px;
+    z-index: 1;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 26px;
+    line-height: 45px;
+
+    color: #BABBC3;
 }

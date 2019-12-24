@@ -1,7 +1,5 @@
-import _ from 'lodash';
 import { createActions, handleActions } from 'redux-actions';
-
-import MovieAPI from '../MovieAPI/MovieAPI';
+import _ from 'lodash';
 
 const defaultState = {
   moviesList: [],
@@ -19,23 +17,27 @@ export const actions = createActions(
   'IS_LOADING',
   'ADD_MOVIE_TO_FAVORITE_LIST',
   'REMOVE_MOVIE_FROM_FAVORITE_LIST',
+  'FETCH_MOVIES',
+  'GET_MOVIE',
+  'ADD_MOVIE',
+  'REMOVE_MOVIE',
 );
 
 export const reducers = handleActions(
   {
     [actions.setMovies]: (state, { payload: { moviesList, genresList } }) => {
       const genresIndex = _.keyBy(genresList, 'id');
-      const m = moviesList.map((movie) => ({
-        ...movie,
-        genresList: movie.genre_ids.map((id) => genresIndex[id]),
+      const m = moviesList.map((m) => ({
+        ...m,
+        genresList: m.genre_ids.map((id) => genresIndex[id]),
       }));
       return { ...state, moviesList: m };
     },
     [actions.setFavoriteMovies]: (state, { payload: { favoriteMoviesList, genresList } }) => {
       const genresIndex = _.keyBy(genresList, 'id');
-      const m = favoriteMoviesList.map((movie) => ({
-        ...movie,
-        genresList: movie.genresList.map((id) => genresIndex[id.id]),
+      const m = favoriteMoviesList.map((m) => ({
+        ...m,
+        genresList: m.genres.map((id) => genresIndex[id.id]),
       }));
       return { ...state, favoriteMoviesList: m };
     },
@@ -60,53 +62,29 @@ export const reducers = handleActions(
       if (_.find(favoriteMoviesList, { id: movie.id })) {
         return { ...state };
       }
-      const updateList = [m, ...favoriteMoviesList];
-      return { ...state, favoriteMoviesList: updateList };
+      favoriteMoviesList = [m, ...favoriteMoviesList];
+      return { ...state, favoriteMoviesList };
     },
-    [actions.isLoading]: (state) => ({
+    [actions.isLoading]: (state, actions) => ({
       ...state,
       loading: actions.payload,
+    }),
+    [actions.fetchMovies]: (state, actions) => ({
+      ...state,
+      action: actions.payload,
+    }),
+    [actions.getMovie]: (state, actions) => ({
+      ...state,
+      action: actions.payload,
+    }),
+    [actions.addMovie]: (state, actions) => ({
+      ...state,
+      action: actions.payload,
+    }),
+    [actions.removeMovie]: (state, actions) => ({
+      ...state,
+      action: actions.payload,
     }),
   },
   defaultState,
 );
-
-export const getMovies = (currentPage) => async (dispatch) => {
-  const movies = await MovieAPI.getAllMovies(currentPage);
-  const genres = await MovieAPI.getGenres();
-  dispatch(actions.setMovies({ moviesList: movies, genresList: genres }));
-  dispatch(actions.isLoading(false));
-};
-
-export const getFavoriteMovies = () => async (dispatch, getState) => {
-  const genres = await MovieAPI.getGenres();
-  const { favoriteMoviesList } = getState();
-  dispatch(actions.setFavoriteMovies({ favoriteMoviesList, genresList: genres }));
-  dispatch(actions.isLoading(true));
-};
-
-export const getSelectedMovie = (id) => async (dispatch) => {
-  const movie = await MovieAPI.getMovieItem(id);
-  const genres = await MovieAPI.getGenres();
-  dispatch(actions.setMovie({ movie, genresList: genres }));
-  dispatch(actions.isLoading(false));
-};
-
-export const addToFavorite = (id) => async (dispatch, getState) => {
-  const { favoriteMoviesList } = getState();
-  const movie = await MovieAPI.getMovieItem(id);
-  const genres = await MovieAPI.getGenres();
-  dispatch(
-    actions.addMovieToFavoriteList({
-      movie,
-      favoriteMoviesList,
-      genresList: genres,
-    }),
-  );
-};
-
-export const removeMovie = (id) => async (dispatch, getState) => {
-  const { favoriteMoviesList } = getState();
-  const movie = await MovieAPI.getMovieItem(id);
-  dispatch(actions.removeMovieFromFavoriteList({ movie, favoriteMoviesList }));
-};
