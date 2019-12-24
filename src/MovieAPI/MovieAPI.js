@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 class MovieAPI {
   constructor(url, key) {
     this.baseURL = url;
@@ -12,7 +11,7 @@ class MovieAPI {
     });
 
     const result = instance.get(path, { params: { api_key: this.key, ...params } }).then((res) => res.data);
-    return result;
+    return await result;
   }
 
   async getAllMovies(page = 1) {
@@ -21,7 +20,7 @@ class MovieAPI {
   }
 
   async getMovieItem(id) {
-    return this.getResourse(`/movie/${id}`);
+    return await this.getResourse(`/movie/${id}`);
   }
 
   async getGenres() {

@@ -1,7 +1,7 @@
-.moviesList {
+.container-fluid.moviesList {
 }
 
-.wrapperList {
-  margin: 0px;
-  padding: 0px;
+.row.wrapperList {
+    padding: 10px 100px 0px 100px;
+    margin: 0px;
 }

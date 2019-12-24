@@ -1,48 +1,40 @@
-.titleLogo {
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 30px;
-  text-transform: uppercase;
-  color: #ffffff;
+
+.row.Header {
+    margin: 0px;
+    padding: 0px;
+    flex-wrap: nowrap;
+    background: #EE8686;
 }
 
-.header {
-  background: #ee8686;
-  justify-content: space-between;
+.titleLogo {
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 75px;
+    text-transform: uppercase;
+    color: #FFFFFF;
 }
 
 .buttonShowFavoriteMovies {
-  border: 2px solid #ffffff;
-  box-sizing: border-box;
-  border-radius: 8px;
-  background: #ee8686;
+    border: 2px solid #FFFFFF;
+    box-sizing: border-box;
+    border-radius: 8px;
+    background: #EE8686;
+    margin-right: 5px;    
 }
 
 .buttonText {
-  color: #ffffff;
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
+    color: #FFFFFF;
+    font-family: Source Sans Pro;
+    font-style: normal;
+    font-weight: normal;
 }
 
 .buttonShowFavoriteMovies.active {
-  background: #ffffff;
+    background: #FFFFFF;
 }
 
 .buttonText.active {
-  color: #ee8686;
-}
-
-.wrapperBtn {
-  text-align: center;
-  align-self: center;
-}
-
-.headerIcon {
-  margin-right: 7px;
-}
-
-.boldText {
-  font-weight: bold;
+    color: #EE8686;
 }
