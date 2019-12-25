@@ -22,7 +22,11 @@ class FavoriteMoviesList extends Component {
     return (
       <div>
         <Header />
-        {loading ? <Loader /> : <Row className="wrapperList">{favoriteMoviesList.map(this.renderMovieList)}</Row>}
+        {loading ? (
+          <Loader />
+        ) : (
+          <Row className="wrapperList wrapperFavoriteMovies">{favoriteMoviesList.map(this.renderMovieList)}</Row>
+        )}
         <Footer />
       </div>
     );

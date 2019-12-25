@@ -10,7 +10,6 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import './MoviesList.css';
 
-@observer
 class MoviesList extends Component {
   componentDidMount() {
     const {
@@ -40,4 +39,4 @@ class MoviesList extends Component {
   }
 }
 
-export default MoviesList;
+export default observer(MoviesList);

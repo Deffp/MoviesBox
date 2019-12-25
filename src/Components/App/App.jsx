@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -10,10 +11,10 @@ const App = () => (
   <div className="Wrapper">
     <Router>
       <Switch>
-        <Route path="/page/:page" component={MoviesList} />
+        <Route path="/page/:page" render={(props) => <MoviesList {...props} key={props.match.params.page} />} />
         <Route path="/favorite_movies_list" component={FavoriteMoviesList} />
         <Route path="/movie/:id" component={SelectedMovieItem} />
-        <Route path="/" component={MoviesList} />
+        <Route path="/" render={(props) => <MoviesList {...props} key={props.match.params.page} />} />
       </Switch>
     </Router>
   </div>

@@ -21,9 +21,19 @@ import Footer from '../Footer/Footer';
 import Loader from '../Loader/Loader';
 import './SelectedMovieItem.css';
 
-@observer
 class SelectedMovieItem extends Component {
   componentDidMount() {
+    const { setMovie } = RootStore.MoviesStore;
+
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    setMovie(parseInt(id));
+  }
+
+  componentDidUpdate() {
     const { setMovie } = RootStore.MoviesStore;
 
     const {
@@ -102,4 +112,4 @@ class SelectedMovieItem extends Component {
   }
 }
 
-export default SelectedMovieItem;
+export default observer(SelectedMovieItem);

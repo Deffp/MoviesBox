@@ -1,10 +1,12 @@
 import { observable, action } from 'mobx';
+import { persist } from 'mobx-persist';
+
 import _ from 'lodash';
 
 import MovieAPI from '../MovieAPI/MovieAPI';
 
 class FavoriteMoviesStore {
-  @observable favoriteMoviesList = [];
+  @persist('list') @observable favoriteMoviesList = [];
 
   @observable loading = true;
 
