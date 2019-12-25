@@ -13,6 +13,7 @@ class RootStore {
     this.MoviesStore = new MoviesStore();
     this.FavoriteMoviesStore = new FavoriteMoviesStore();
     hydrate('FavoriteMoviesList', this.FavoriteMoviesStore);
+    hydrate('Movies', this.MoviesStore);
   }
 }
 

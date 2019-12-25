@@ -1,4 +1,5 @@
-import { observable } from 'mobx';
+import { observable, toJS } from 'mobx';
+import { persist } from 'mobx-persist';
 import _ from 'lodash';
 
 import MovieAPI from '../MovieAPI/MovieAPI';
@@ -10,7 +11,7 @@ class MoviesStore {
 
   @observable loading = true;
 
-  @observable movie = { genresList: [] };
+  @persist('object') @observable movie = { genresList: [] };
 
   @observable setMovies = async (page) => {
     try {
@@ -31,17 +32,22 @@ class MoviesStore {
   };
 
   @observable setMovie = async (idMovie) => {
-    const genresList = await MovieAPI.getGenres();
-    const genresIndex = _.keyBy(genresList, 'id');
-    const movie = this.moviesList.find((m) => m.id === idMovie);
-    const selectedMovie = {
-      ...movie,
-      genresList: movie.genre_ids.map((id) => genresIndex[id]),
-    };
-    this.movie = {
-      ...selectedMovie,
-    };
-    this.loading = false;
+    try {
+      const genresList = await MovieAPI.getGenres();
+      const genresIndex = _.keyBy(genresList, 'id');
+      const movie = this.moviesList.find((m) => m.id === idMovie);
+      const selectedMovie = {
+        ...movie,
+        genresList: movie.genre_ids.map((id) => genresIndex[id]),
+      };
+      this.movie = {
+        ...selectedMovie,
+      };
+    } catch (error) {
+      console.log(toJS(this.movie));
+    } finally {
+      this.loading = false;
+    }
   };
 }
 
