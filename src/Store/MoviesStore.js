@@ -1,8 +1,8 @@
-import { observable, toJS } from 'mobx';
-import { persist } from 'mobx-persist';
-import _ from 'lodash';
+import { observable, toJS } from "mobx";
+import { persist } from "mobx-persist";
+import _ from "lodash";
 
-import MovieAPI from '../MovieAPI/MovieAPI';
+import MovieAPI from "../MovieAPI/MovieAPI";
 
 class MoviesStore {
   @observable moviesList = [];
@@ -11,16 +11,16 @@ class MoviesStore {
 
   @observable loading = true;
 
-  @persist('object') @observable movie = { genresList: [] };
+  @persist("object") @observable movie = { genresList: [] };
 
-  @observable setMovies = async (page) => {
+  @observable setMovies = async page => {
     try {
       const movies = await MovieAPI.getAllMovies(page);
       const genresList = await MovieAPI.getGenres();
-      const genresIndex = _.keyBy(genresList, 'id');
-      const moviesList = movies.map((movie) => ({
+      const genresIndex = _.keyBy(genresList, "id");
+      const moviesList = movies.map(movie => ({
         ...movie,
-        genresList: movie.genre_ids.map((id) => genresIndex[id]),
+        genresList: movie.genre_ids.map(id => genresIndex[id])
       }));
       this.moviesList = [...moviesList];
       this.genresList = [...genresList];
@@ -31,17 +31,19 @@ class MoviesStore {
     }
   };
 
-  @observable setMovie = async (idMovie) => {
+  @observable setMovie = async idMovie => {
     try {
       const genresList = await MovieAPI.getGenres();
-      const genresIndex = _.keyBy(genresList, 'id');
-      const movie = this.moviesList.find((m) => m.id === idMovie);
+      const movie = await MovieAPI.getMovieItem(idMovie);
+      console.log(movie);
+      const genresIndex = _.keyBy(genresList, "id");
       const selectedMovie = {
         ...movie,
-        genresList: movie.genre_ids.map((id) => genresIndex[id]),
+        genresList: movie.genres.map(id => genresIndex[id])
       };
+      console.log(1);
       this.movie = {
-        ...selectedMovie,
+        ...selectedMovie
       };
     } catch (error) {
       console.log(toJS(this.movie));
