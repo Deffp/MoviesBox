@@ -1,6 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
+// eslint-disable-next-line object-curly-newline
 import { FaFacebookF, FaPinterestP, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 import './Footer.css';

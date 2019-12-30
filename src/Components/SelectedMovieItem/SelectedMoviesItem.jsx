@@ -1,14 +1,21 @@
+/* eslint-disable object-curly-newline */
+/* eslint-disable radix */
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable arrow-body-style */
+// eslint-disable-next-line object-curly-newline
+
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
+
 import _ from 'lodash';
 import classNames from 'classnames/bind';
-import { connect } from 'react-redux';
 import { Container, Row, Image, Col } from 'react-bootstrap';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-import { getSelectedMovie, addToFavorite, removeMovie } from '../../Reducer/ReducerMoviesList';
-import { store } from '../../Store/Store';
+import RootStore from '../../Store/RootStore';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Loader from '../Loader/Loader';
@@ -16,32 +23,27 @@ import './SelectedMovieItem.css';
 
 class SelectedMovieItem extends Component {
   componentDidMount() {
+    const { setMovie } = RootStore.MoviesStore;
+
     const {
       match: {
         params: { id },
       },
-      getSelectedMovie,
     } = this.props;
-    getSelectedMovie(id);
+    setMovie(parseInt(id));
   }
 
   displayGenres = (movie) => movie.genresList.map((categorie) => categorie.name).join(',');
 
   buttonChange = () => {
-    const {
-      match: {
-        params: { id },
-      },
-      addToFavorite,
-      removeMovie,
-      isFavorite,
-    } = this.props;
+    const { favoriteMoviesList, addMovie, removeMovie } = RootStore.FavoriteMoviesStore;
+    const { movie } = RootStore.MoviesStore;
 
-    return isFavorite ? (
+    return _.find(favoriteMoviesList, { id: movie.id }) ? (
       <button
         type="button"
         className={classNames({ buttonFavorite: true }, { active: true })}
-        onClick={_.partial(removeMovie, id)}>
+        onClick={() => removeMovie(movie.id)}>
         <span>Remove from favorites</span>
         <FontAwesomeIcon className="iconInButton" icon={faStar} />
       </button>
@@ -49,7 +51,7 @@ class SelectedMovieItem extends Component {
       <button
         type="button"
         className={classNames({ buttonFavorite: true }, { active: false })}
-        onClick={_.partial(addToFavorite, id)}>
+        onClick={() => addMovie(movie)}>
         <span>Add to favorites</span>
         <FontAwesomeIcon className="iconInButton" icon={faStar} />
       </button>
@@ -57,7 +59,7 @@ class SelectedMovieItem extends Component {
   };
 
   render() {
-    const { movie, loading } = this.props;
+    const { movie, loading } = RootStore.MoviesStore;
     return (
       <div className="wrapperSelectedMovie">
         <Header />
@@ -71,7 +73,9 @@ class SelectedMovieItem extends Component {
                   <Col
                     className="wrapperImg topImg"
                     md={12}
-                    style={{ backgroundImage: `url(http://image.tmdb.org/t/p/w500${movie.backdrop_path})` }}>
+                    style={{
+                      backgroundImage: `url(http://image.tmdb.org/t/p/w500${movie.backdrop_path})`,
+                    }}>
                     <div className="wrapperText">
                       <span className="originalTitle">{movie.original_title}</span>
                       <span className="releaseDate">{moment(movie.release_date).format('Y')} </span>
@@ -99,16 +103,4 @@ class SelectedMovieItem extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  movie: state.movie,
-  loading: state.loading,
-  isFavorite: _.find(store.getState().favoriteMoviesList, {
-    id: state.movie.id,
-  }),
-});
-
-export default connect(mapStateToProps, {
-  getSelectedMovie,
-  addToFavorite,
-  removeMovie,
-})(SelectedMovieItem);
+export default observer(SelectedMovieItem);
