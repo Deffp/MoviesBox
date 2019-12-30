@@ -25,7 +25,7 @@ class MoviesStore {
       this.moviesList = [...moviesList];
       this.genresList = [...genresList];
     } catch (error) {
-      //   console.log(error);
+      console.log(error);
     } finally {
       this.loading = false;
     }
@@ -34,11 +34,11 @@ class MoviesStore {
   @observable setMovie = async (idMovie) => {
     try {
       const genresList = await MovieAPI.getGenres();
+      const movie = await MovieAPI.getMovieItem(idMovie);
       const genresIndex = _.keyBy(genresList, 'id');
-      const movie = this.moviesList.find((m) => m.id === idMovie);
       const selectedMovie = {
         ...movie,
-        genresList: movie.genre_ids.map((id) => genresIndex[id]),
+        genresList: movie.genres.map((id) => genresIndex[id.id]),
       };
       this.movie = {
         ...selectedMovie,

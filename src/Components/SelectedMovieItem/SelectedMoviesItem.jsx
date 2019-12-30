@@ -33,17 +33,6 @@ class SelectedMovieItem extends Component {
     setMovie(parseInt(id));
   }
 
-  componentDidUpdate() {
-    const { setMovie } = RootStore.MoviesStore;
-
-    const {
-      match: {
-        params: { id },
-      },
-    } = this.props;
-    setMovie(parseInt(id));
-  }
-
   displayGenres = (movie) => movie.genresList.map((categorie) => categorie.name).join(',');
 
   buttonChange = () => {
@@ -84,7 +73,9 @@ class SelectedMovieItem extends Component {
                   <Col
                     className="wrapperImg topImg"
                     md={12}
-                    style={{ backgroundImage: `url(http://image.tmdb.org/t/p/w500${movie.backdrop_path})` }}>
+                    style={{
+                      backgroundImage: `url(http://image.tmdb.org/t/p/w500${movie.backdrop_path})`,
+                    }}>
                     <div className="wrapperText">
                       <span className="originalTitle">{movie.original_title}</span>
                       <span className="releaseDate">{moment(movie.release_date).format('Y')} </span>
